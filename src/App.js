@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import Login from "./pages/Login";
+import "../src/App.scss";
+import Register from "./pages/Register";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/Home";
+import Withdraw from "./components/Withdraw";
+import Deposit from "./components/Deposit";
+import Transfer from "./components/Transfer";
+import Transactions from "./components/Transactions";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { useState } from "react";
+
 
 function App() {
+  const [user, setUser] = useState("");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      setUser(uid);
+    }
+  })
+
+  const ProtectedRoutes = ({ children }) => {
+    if (!user) {
+      return <Navigate to="/login" />
+    }
+
+    return children;
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route path="/" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/withdraw" element={<ProtectedRoutes><Withdraw /></ProtectedRoutes>} />
+          <Route path="/deposit" element={<ProtectedRoutes><Deposit /></ProtectedRoutes>} />
+          <Route path="/transfer" element={<ProtectedRoutes><Transfer /></ProtectedRoutes>} />
+          <Route path="/transactions" element={<ProtectedRoutes><Transactions /></ProtectedRoutes>} />
+        </Routes>
+      </Router>
     </div>
   );
 }
