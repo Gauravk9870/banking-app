@@ -33,13 +33,22 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
+          {/* <Route path="/" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/withdraw" element={<ProtectedRoutes><Withdraw /></ProtectedRoutes>} />
           <Route path="/deposit" element={<ProtectedRoutes><Deposit /></ProtectedRoutes>} />
           <Route path="/transfer" element={<ProtectedRoutes><Transfer /></ProtectedRoutes>} />
-          <Route path="/transactions" element={<ProtectedRoutes><Transactions /></ProtectedRoutes>} />
+          <Route path="/transactions" element={<ProtectedRoutes><Transactions /></ProtectedRoutes>} /> */}
+
+          <Route path="/" element={<Home/>}/>
+          <Route path="/withdraw" element={<Withdraw/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/transfer" element={<Transfer/>}/>
+          <Route path="/deposit" element={<Deposit/>}/>
+          <Route path="/transactions" element={<Transactions/>}/>
+
         </Routes>
       </Router>
     </div>

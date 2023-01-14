@@ -124,3 +124,47 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .transfer {
+    // height: auto;
+    .container {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+
+      .title {
+        h1 {
+          font-size: 35px;
+        }
+        p {
+          font-size: 9px;
+        }
+      }
+
+      .actions {
+        width: 73%;
+
+        .button {
+          button {
+            font-size: 12px;
+          }
+        }
+      }
+
+      .errorNote {
+        font-size: 10px;
+        color: red;
+      }
+      .successNote {
+        font-size: 10px;
+        color: green;
+
+        .remainingAmt {
+          color: green;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
